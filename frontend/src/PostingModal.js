@@ -7,8 +7,8 @@ function PostingModal({show,mode,editData,onClose,addPosting,updatePosting}){
 const [posting,setPosting] = useState({});
 //
 useEffect(()=>{
-console.log('Render only after clicking a different pencil',editData);
-setPosting(editData); // 
+console.log('Render only after clicking a different pencil or close',editData);
+setPosting(editData); // Pass to the form the row's data
 },[editData]);
 
 //

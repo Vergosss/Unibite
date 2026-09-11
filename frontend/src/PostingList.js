@@ -26,9 +26,13 @@ const [editData,setEditData] = useState({});
         
         </Table>
 
-        <Button style={{width:"100%"}} variant='primary' onClick={()=>{setAdd(true);setMode(0)}}>Create a new Posting</Button>
-        <PostingModal show={add} mode={mode} editData={editData} onClose={()=>{setAdd(false)}} addPosting={addPosting} updatePosting={updatePosting} />
-
+        <Button style={{width:"100%"}} variant='primary' onClick={()=>{setAdd(true);setMode(0);setEditData({});}}>Create a new Posting</Button>
+        <PostingModal show={add} mode={mode} editData={editData} onClose={()=>{setAdd(false);setEditData({})}} addPosting={addPosting} updatePosting={updatePosting} />
+{/**After each close we reset the editdata show changes to 0 so postinglist rerenders passing null editdata. 
+ * if i dont do this <editData> never changes so modals useffect never runs never changing the state thus keeping the unsaved data.
+ * while if i nullify the editData it changes so useffect can run setting the form to the row's data and not what was typed but unsaved 
+ * 
+ */}
         </div>
     );
 }
