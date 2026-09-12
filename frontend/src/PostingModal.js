@@ -29,14 +29,15 @@ function handleClick(){
     onClose();
     return;
     }
-    console.log(posting);
+    console.log('Inserting...',posting);
     return;
     addPosting(posting);
     setPosting({});
 }
 else{
-    console.log(posting);
-    //updatePosting();
+    console.log('Editing...',posting);
+    return;
+    updatePosting(posting);
 }
 }
 //

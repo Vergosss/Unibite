@@ -46,11 +46,11 @@ async function addPosting(posting){
         }
 }
   //
-async function updatePosting(id){
+async function updatePosting(posting){
   try{
-      const updatedPosting = {};
-      const response = await axios.put(`http://localhost:5000/postings/${id}`);
-      setPostings();
+      
+      const response = await axios.put(`http://localhost:5000/postings/${posting.id}`,posting);
+      setPostings(postings.map((item)=>{if (item.id === posting.id){Object.assign(item,posting)} return item })); //if update succeeds in the backend/database change the state so table can refresh
   }
   catch(error){
     console.log(error);
