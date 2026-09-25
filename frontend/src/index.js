@@ -3,14 +3,19 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import Login from './Login';
 import Signup from './Signup';
-import Postings from './Postings'
+//import Postings from './Postings'
 import Header from './Header';
+import Requests from './Requests/Requests';
+import Navigation from './Navigation/Navigation';
+import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <>
-    <Header/>
-    <Postings/>
+<BrowserRouter>
+  <Navigation/>
+</BrowserRouter>
+
   </>
 );
 

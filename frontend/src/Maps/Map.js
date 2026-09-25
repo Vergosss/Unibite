@@ -5,7 +5,7 @@ import {Popup} from 'react-leaflet/Popup'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'leaflet/dist/leaflet.css';
 
-import blueMarker from './markers/blueMarker'
+import blueMarker from '../markers/blueMarker'
 function Map({markers}){
   //
 

@@ -41,7 +41,7 @@ public class PostingController {
         service.deletePosting(id);
     }
     @PutMapping("/{id}")
-    public void updatePosting(@PathVariable("id") String id,@RequestBody Object data){
+    public void updatePosting(@PathVariable("id") String id,@RequestBody PostingDTO data){
         service.updatePosting(id,data);
     }
 

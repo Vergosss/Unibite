@@ -1,5 +1,5 @@
 
-import Map from './Map';
+import Map from '../Maps/Map';
 import PostingList from './PostingList';
 import { useEffect,useState } from 'react';
 import axios from 'axios';
@@ -11,7 +11,7 @@ const [postings,setPostings] = useState([]);
    useEffect(()=>{
     const fetchPostings = async() =>{
     try{
-      const response = await axios.get('http://localhost:5000/postings');
+      const response = await axios.get('http://localhost:5000/postings',{withCredentials:true});
       setPostings(response.data); // if you try here to return html it wont work. but if not here when? the returned html is in the render so
      console.log(postings); //indirectly we 'save' the markers via state then we exploit the state to render the markers
     }
@@ -25,7 +25,7 @@ const [postings,setPostings] = useState([]);
 
 async function addPosting(posting){
     try{
-        const response = await axios.post('http://localhost:5000/postings',posting);
+        const response = await axios.post('http://localhost:5000/postings',posting,{withCredentials:true});
         setPostings([...postings,response.data]);
         
     }
@@ -37,7 +37,7 @@ async function addPosting(posting){
  async function deletePosting(id){
         console.log(id);
         try{  
-          const response = await axios.delete(`http://localhost:5000/postings/${id}`);
+          const response = await axios.delete(`http://localhost:5000/postings/${id}`,{withCredentials:true});
 
           setPostings(postings.filter((posting)=>posting.id !==id));
         }
@@ -49,7 +49,7 @@ async function addPosting(posting){
 async function updatePosting(posting){
   try{
       
-      const response = await axios.put(`http://localhost:5000/postings/${posting.id}`,posting);
+      const response = await axios.put(`http://localhost:5000/postings/${posting.id}`,posting,{withCredentials:true});
       setPostings(postings.map((item)=>{if (item.id === posting.id){Object.assign(item,posting)} return item })); //if update succeeds in the backend/database change the state so table can refresh
   }
   catch(error){

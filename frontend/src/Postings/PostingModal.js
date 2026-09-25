@@ -2,7 +2,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import PostingForm from './PostingForm';
 import { useEffect, useState } from 'react';
-function PostingModal({show,mode,editData,onClose,addPosting,updatePosting}){
+function PostingModal({show,mode,editData,onClose,addPosting,updatePosting,deletePosting}){
 //
 const [posting,setPosting] = useState({});
 //
@@ -30,31 +30,55 @@ function handleClick(){
     return;
     }
     console.log('Inserting...',posting);
-    return;
     addPosting(posting);
-    setPosting({});
+    //setPosting({});
+    onClose();
+}
+else if(mode === 1){
+    console.log('Editing...',posting);
+    updatePosting(posting);
+    onClose();
 }
 else{
-    console.log('Editing...',posting);
-    return;
-    updatePosting(posting);
+    console.log('Deleting...',posting);
+    deletePosting(posting.id);
+    onClose();
 }
 }
 //
 return (
         <Modal backdrop="static" keyboard={false} show={show} onHide={onClose} centered>
             <Modal.Header closeButton>
-                <Modal.Title>Create a Posting</Modal.Title>
+                <Modal.Title>{(()=>{switch(mode){
+                    case 0:
+                        return "Create Posting";
+                    case 1:
+                        return "Edit Posting";
+                    case 2:
+                        return "Delete Posting";
+                    default:
+                        return "Error";
+
+                }})()}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <PostingForm handleChange={handleChange} posting={posting}/>
+              {(mode === 0 || mode === 1) ? <PostingForm handleChange={handleChange} posting={posting}/> : "This action cannot be undone"}
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={onClose}>
-                     Close
+                     Cancel
                 </Button>
                 <Button variant="primary" onClick={handleClick}>
-                {(mode === 0 )? "Add Posting" : "Submit Changes"}
+                {(() => {switch(mode){
+                    case 0:
+                        return "Add Posting"; 
+                    case 1:
+                        return "Submit Changes"; 
+                    case 2:
+                        return "Delete Posting"; 
+                    default:
+                        return "Error"; 
+                }})()}
                 </Button>
             </Modal.Footer>
 </Modal>

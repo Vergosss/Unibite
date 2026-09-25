@@ -1,6 +1,5 @@
 package com.example.entity;
 
-
 import org.springframework.data.annotation.Id;
 
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -17,7 +16,7 @@ public class User {
     };
 
     private userRole role;
-    private int telephone;
+    private String telephone;
     private String email;
     private int points;
 
@@ -38,7 +37,7 @@ public class User {
         return role.toString();
     }
 
-    public int getTelephone() {
+    public String getTelephone() {
         return telephone;
     }
 
@@ -63,7 +62,7 @@ public class User {
         this.role = userRole.valueOf(role);
     }
 
-    public void setTelephone(int telephone) {
+    public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
 
